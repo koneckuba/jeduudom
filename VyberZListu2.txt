@@ -1,0 +1,91 @@
+namespace ConsoleApp2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Student> zaci = new(){
+                new Student(1,"Danny", "Píner", 12, "5b"),
+                new Student(2,"Pavel", "Habera", 14, "8b"),
+                new Student(3,"Jan", "Novak", 12, "7c"),
+                new Student(4,"Marek", "Kratký", 15, "9b"),
+                new Student(5,"Standa", "Malý", 15, "5b"),
+                new Student(6,"Jozka", "Dlouhý", 17, "6c"),
+                new Student(7,"Ema", "Knedlíková", 18, "7a"),
+
+
+            };
+
+
+
+            var Trida_5b = zaci.Where(c => c.Trida == "5b").ToList();
+
+            var Trida_7c = (from t in zaci
+                            where t.Trida == "7a"
+                            select t).ToList();
+
+
+            //var pocet_zaku_5a = zaci.Where(c => c.Trida == "5a").ToList();
+
+            VypisPole(Trida_5b);
+            Console.WriteLine();
+            VypisPole(Trida_7c);
+
+
+            /*List<Student> PodlePrijmeni = (from q in zaci
+                                          orderby q.Trida
+                                          select q).ToList();
+
+
+            VypisPole(PodlePrijmeni);*/
+            //var dotaz = from z in zaci
+            //            group z by z.Trida into tridy
+            //            orderby tridy.Key
+            //            select new { Trida = tridy.Key, zaci = tridy };
+
+            //foreach(var skupina in dotaz) 
+            //{ 
+            //    Console.WriteLine(skupina.Trida);
+            //    foreach(var zak in skupina.zaci)
+            //    {
+            //        Console.WriteLine(zak);
+            //    }
+
+
+
+
+            //}
+
+
+            //Student tom = (from q in zaci
+            //              where(q.Jmeno== "Danny")
+            //              select q).First();
+
+
+            //Student standa = zaci.First(m => m.Jmeno == "Standa");
+            ///*foreach(var zak in zaci)
+            //{
+            //    if (zak.Jmeno.ToLower().Trim() == "danny" ) {
+            //    tom = zak;
+            //    break;
+            //    }
+            //}*/
+
+            //if(tom != null && standa!= null)
+            //{
+            //    Console.WriteLine(tom);
+            //    Console.WriteLine(standa);
+            //}
+
+
+        }
+        static void VypisPole(List<Student> struktura)
+        {
+            foreach (Student i in struktura)
+            {
+                Console.WriteLine(i);
+            }
+            Console.WriteLine("");
+        }
+    }
+}

@@ -1,0 +1,40 @@
+namespace ConsoleApp2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> cisla = new List<int>{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            List<int> suda = (from i in cisla
+                             where(i%2 == 0)
+                             orderby i descending
+                             select i).ToList();
+
+
+            List<int> licha =  cisla
+                .Where(x => x % 2 == 1)
+                .OrderByDescending(x => x)
+                .ToList();
+
+
+            //foreach(int i in cisla)
+            // {
+            //     if(i% 2 ==0)
+            //     {
+            //         suda.Add(i);
+            //     }
+            // }
+            VypisPole(suda);
+            VypisPole(licha);
+
+        }
+        static void VypisPole(List<int> struktura)
+        {
+            foreach(int i in struktura)
+            {
+                Console.WriteLine(i);
+            }
+            Console.WriteLine("");
+        }
+    }
+}

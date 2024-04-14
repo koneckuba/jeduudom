@@ -1,0 +1,95 @@
+Program.cs
+
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Evidence evidence = new Evidence();
+
+            evidence.vytvorZaznam("Walda", "Matuška");
+            evidence.vytvorZaznam("Vašek", "Malý");
+            evidence.vytvorZaznam("Pavel", "Novák");
+            Console.WriteLine("--------VÝPIS--------");
+            evidence.vypisZaznamy();
+            Console.WriteLine("--------Vyhledávání--------");
+            Zamestnanec hledany = evidence.vyheldejPodleID(2);
+            Console.WriteLine($"Hledaný zaměstnanec s Id = 2 je \n\t{hledany}");
+        }
+    }
+}
+
+Evidence.cs
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
+
+namespace ConsoleApp1
+{
+    internal class Evidence
+    {
+        private List<Zamestnanec> zamestnanci;
+        public Evidence()
+        {
+            zamestnanci = new();
+        }
+        public List<Zamestnanec> Zamestnanci => zamestnanci;
+        
+        public void vytvorZaznam(string jmeno, string prijmeni)
+        {
+            zamestnanci.Add(new(getID(), jmeno, prijmeni));
+            
+        }
+        public void vypisZaznamy()
+        {
+            Console.WriteLine("ID\tJMENO\tPRIJMENI\n");
+            zamestnanci.ForEach(z => Console.WriteLine(z));
+
+        }
+        public Zamestnanec vyheldejPodleID(int id) => zamestnanci.First(z => z.Id == id);
+        
+        private int getID()
+        {
+            return zamestnanci.Count == 0 ? 1 : zamestnanci.OrderBy(x => x.Id).Last().Id+1;
+        }
+
+
+    }
+}
+
+Zamestnanec.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    internal class Zamestnanec
+    {
+        public int Id { get; set; }
+        public string Jmeno { get; set; }
+        public string Prijmeni { get; set; }
+        public Zamestnanec(int id, string jmeno, string prijmeni)
+        {
+            Id = id;
+            Jmeno = jmeno;
+            Prijmeni = prijmeni;
+        }
+        public override string ToString()
+        {
+            return $"{Id}\t{Jmeno}\t{Prijmeni}";
+        }
+
+
+    }
+}
+
